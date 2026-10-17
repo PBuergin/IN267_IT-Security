@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <title>Level 2 - Mitarbeitersuche</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; background: #f4f6f9; }
+        .container { background: #fff; padding: 30px; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 800px; margin: auto; }
+        h1 { color: #0056b3; border-bottom: 2px solid #0056b3; padding-bottom: 10px; }
+        input[type="text"] { width: 70%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px; }
+        button { padding: 10px 20px; background: #0056b3; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .error { color: #dc3545; background: #f8d7da; padding: 10px; margin-top: 15px; border-radius: 4px; }
+        .nav { margin-bottom: 20px; }
+        .nav a { color: #0056b3; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="nav"><a href="/">&larr; Zurück zur Übersicht</a></div>
+    <h1>Mitarbeiter-Verzeichnis</h1>
+    <form method="GET">
+        <input type="text" name="q" placeholder="Name suchen..." value="{{ query }}">
+        <button type="submit">Suchen</button>
+    </form>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    {% if results is not none %}
+        <h3>Suchergebnisse:</h3>
+        {% if results %}
+            <table>
+                <tr><th>ID</th><th>Name</th><th>Abteilung</th><th>E-Mail</th></tr>
+                {% for row in results %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>Keine Mitarbeiter gefunden.</p>
+        {% endif %}
+    {% endif %}
+</div>
+</body>
+</html>

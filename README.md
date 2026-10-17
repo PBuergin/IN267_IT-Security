@@ -13,7 +13,7 @@ Bevor du mit den Labs starten kannst, müssen folgende Tools auf deinem Rechner 
 git clone https://github.com/dobaumann/IN267_IT-Security.git
 
 # 2. In das geklonte Verzeichnis wechseln (Extrem wichtig für das Volume-Mapping!)
-cd IN267_IT-Security
+cd IN267_IT-Security   
 ```
 
 ---

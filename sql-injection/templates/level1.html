@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <title>Level 1 - Admin Login</title>
+    <style>
+        body { background: #f4f6f9; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-card { background: #fff; padding: 30px; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 320px; border-top: 5px solid #0056b3; }
+        input { width: 100%; padding: 10px; margin: 8px 0 20px 0; border: 1px solid #ced4da; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #0056b3; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+        .error { color: #dc3545; background: #f8d7da; padding: 10px; margin-top: 15px; border-radius: 4px; text-align: center; font-size: 14px; }
+        .nav { margin-bottom: 20px; text-align: center; }
+        .nav a { color: #0056b3; text-decoration: none; font-size: 14px; }
+    </style>
+</head>
+<body>
+<div>
+    <div class="nav"><a href="/">&larr; Zurück zur Übersicht</a></div>
+    <div class="login-card">
+        <h2 style="margin: 0 0 5px 0;">Admin Portal</h2>
+        <p style="color: #666; margin: 0 0 20px 0; font-size: 14px;">Faust Electronics GmbH</p>
+        <form method="POST">
+            <label>Benutzername</label>
+            <input type="text" name="username" autofocus>
+            <label>Passwort</label>
+            <input type="password" name="password">
+            <button type="submit">Anmelden</button>
+        </form>
+        {% if message %}
+            <div class="error">{{ message }}</div>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <title>Level 3 - Lizenz-Prüfung</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; background: #f4f6f9; }
+        .container { background: #fff; padding: 30px; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 800px; margin: auto; }
+        h1 { color: #0056b3; border-bottom: 2px solid #0056b3; padding-bottom: 10px; }
+        input[type="text"] { width: 70%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px; }
+        button { padding: 10px 20px; background: #0056b3; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .result { margin-top: 20px; padding: 15px; border-radius: 4px; display: none; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .nav { margin-bottom: 20px; }
+        .nav a { color: #0056b3; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="nav"><a href="/">&larr; Zurück zur Übersicht</a></div>
+    <h1>Lizenz-Prüfungs API (Intern)</h1>
+    <p>Bitte geben Sie den Lizenzschlüssel der Faust Electronics GmbH ein, um die Software zu aktivieren.</p>
+    
+    <div>
+        <input type="text" id="licenseKey" placeholder="XXXX-XXXX-XXXX-XXXX">
+        <button onclick="checkLicense()">Prüfen</button>
+    </div>
+
+    <div id="resultBox" class="result"></div>
+
+    <h3 style="margin-top:40px;">API Dokumentation für Entwickler:</h3>
+    <pre style="background: #eee; padding: 10px; border-radius: 4px;">GET /level3/api/check-license?key={LIZENZ_SCHLUESSEL}
+Response: {"status": "success" | "error", "message": "..."}</pre>
+</div>
+
+<script>
+    function checkLicense() {
+        const key = document.getElementById('licenseKey').value;
+        const resultBox = document.getElementById('resultBox');
+        
+        fetch(`/level3/api/check-license?key=${encodeURIComponent(key)}`)
+            .then(response => response.json())
+            .then(data => {
+                resultBox.style.display = 'block';
+                resultBox.textContent = data.message;
+                if(data.status === 'success') {
+                    resultBox.className = 'result success';
+                } else {
+                    resultBox.className = 'result error';
+                }
+            })
+            .catch(error => {
+                resultBox.style.display = 'block';
+                resultBox.textContent = 'API Fehler!';
+                resultBox.className = 'result error';
+            });
+    }
+</script>
+</body>
+</html>

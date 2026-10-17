@@ -12,6 +12,8 @@
 # OS Spezifisch
 .DS_Store
 Thumbs.db
+/brute-force/rockyou.txt
+
 
 # Docker (falls IDEs spezifische Docker-Configs anlegen)
 .docker/

